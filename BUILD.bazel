@@ -6,15 +6,11 @@ package(default_visibility = ["//visibility:public"])
 
 copy_to_bin(
     name = "copy_static_files",
-    srcs = glob(
-        [
-            "public/*",
-            "pages/*",
-            "styles/*",
-        ],
-    ) + [
-        "package.json",
-    ],
+    srcs = glob([
+        "public/*",
+        "pages/*",
+        "styles/*",
+    ]),
 )
 
 next(
@@ -34,23 +30,11 @@ next(
     ],
 )
 
-filegroup(
-    name = "sources",
-    srcs = glob(
-        include = [
-            "pages/*",
-            "styles/*",
-            "public/*",
-        ],
-    ),
-)
-
 nodejs_binary(
     name = "client",
     args = ["start"],
     data = [
         "build",
-        "sources",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",
@@ -62,7 +46,6 @@ nodejs_image(
     args = ["start"],
     data = [
         "build",
-        "sources",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",
