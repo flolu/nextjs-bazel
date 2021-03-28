@@ -26,8 +26,11 @@ next(
     ],
     data = [
         "copy_static_files",
+        "@npm//@types/node",
+        "@npm//@types/react",
         "@npm//react",
         "@npm//react-dom",
+        "@npm//typescript",
     ],
 )
 
