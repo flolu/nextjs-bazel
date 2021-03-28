@@ -1,0 +1,67 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin", "nodejs_binary")
+load("@npm//next:index.bzl", "next")
+load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
+
+package(default_visibility = ["//visibility:public"])
+
+copy_to_bin(
+    name = "copy_static_files",
+    srcs = glob(
+        [
+            "public/*",
+            "pages/*",
+            "styles/*",
+        ],
+    ) + [
+        "package.json",
+    ],
+)
+
+next(
+    name = "build",
+    outs = [".next"],
+    args = [
+        "build",
+        "$(RULEDIR)",
+    ],
+    data = [
+        "copy_static_files",
+        "@npm//react",
+        "@npm//react-dom",
+    ],
+)
+
+filegroup(
+    name = "sources",
+    srcs = glob(
+        include = [
+            "pages/*",
+            "styles/*",
+            "public/*",
+        ],
+    ),
+)
+
+nodejs_binary(
+    name = "client",
+    args = ["start"],
+    data = [
+        "build",
+        "sources",
+        "@npm//:node_modules",
+    ],
+    entry_point = "@npm//:node_modules/next/dist/bin/next",
+    templated_args = ["--bazel_patch_module_resolver"],
+)
+
+nodejs_image(
+    name = "client_image",
+    args = ["start"],
+    data = [
+        "build",
+        "sources",
+        "@npm//:node_modules",
+    ],
+    entry_point = "@npm//:node_modules/next/dist/bin/next",
+    templated_args = ["--bazel_patch_module_resolver"],
+)
