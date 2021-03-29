@@ -4,10 +4,10 @@ load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
 
 package(default_visibility = ["//visibility:public"])
 
-copy_to_bin(
-    name = "copy_static_files",
+filegroup(
+    name = "source_files",
     srcs = glob([
-        "public/*",
+        "public/**/*",
         "pages/*",
         "styles/*",
     ]) + [
@@ -20,17 +20,28 @@ copy_to_bin(
     ],
 )
 
+copy_to_bin(
+    name = "copy_source_files",
+    srcs = ["source_files"],
+)
+
 next(
     name = "build",
-    outs = [".next"],
+    outs = [
+        ".next",
+        "public/sw.js",
+        # FIXME this filename will probably change, needs more investigation
+        "public/workbox-030153e1.js",
+    ],
     args = [
         "build",
         "$(RULEDIR)",
     ],
     data = [
-        "copy_static_files",
+        "copy_source_files",
         "@npm//@types/node",
         "@npm//@types/react",
+        "@npm//next-pwa",
         "@npm//react",
         "@npm//react-dom",
         "@npm//typescript",
@@ -42,7 +53,7 @@ nodejs_binary(
     args = ["start"],
     data = [
         "build",
-        "copy_static_files",
+        "copy_source_files",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",
@@ -54,7 +65,7 @@ nodejs_image(
     args = ["start"],
     data = [
         "build",
-        "copy_static_files",
+        "copy_source_files",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",

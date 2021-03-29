@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:bazel": "bazelisk run client"
+    "start:bazel": "bazelisk run client",
+    "start:bazel:debug": "bazelisk run client --sandbox_debug",
+    "start:image": "bazelisk run client_image"
   },
   "dependencies": {
     "next": "10.0.9",
+    "next-pwa": "^5.0.6",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
