@@ -10,7 +10,14 @@ copy_to_bin(
         "public/*",
         "pages/*",
         "styles/*",
-    ]),
+    ]) + [
+        # FIXME not sure which of those are actually needed
+        "tsconfig.json",
+        "next.config.js",
+        "next-env.d.ts",
+        "package.json",
+        "yarn.lock",
+    ],
 )
 
 next(
@@ -35,6 +42,7 @@ nodejs_binary(
     args = ["start"],
     data = [
         "build",
+        "copy_static_files",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",
@@ -46,6 +54,7 @@ nodejs_image(
     args = ["start"],
     data = [
         "build",
+        "copy_static_files",
         "@npm//:node_modules",
     ],
     entry_point = "@npm//:node_modules/next/dist/bin/next",
