@@ -36,6 +36,8 @@ next(
     args = [
         "build",
         "$(RULEDIR)",
+        "--node_options=--preserve-symlinks-main",
+        "--bazel_run_from_execroot",
     ],
     data = [
         "copy_source_files",

@@ -2,11 +2,6 @@ import Document, {Head, Html, Main, NextScript} from 'next/document'
 
 export default class MyDocument extends Document {
   render() {
-    const bodyStyles ={
-      margin: 0,
-      fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif'
-    }
-
     return (
       <Html lang="en">
         <Head>
@@ -22,7 +17,7 @@ export default class MyDocument extends Document {
 
           <link rel="manifest" href="/manifest.json" />
         </Head>
-        <body className="theme light" style={bodyStyles}>
+        <body className="theme light">
           <Main />
           <NextScript />
         </body>
