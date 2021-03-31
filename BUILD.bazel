@@ -1,8 +1,13 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin", "nodejs_binary")
 load("@npm//next:index.bzl", "next")
 load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
+load(":index.bzl", "nextjs")
 
 package(default_visibility = ["//visibility:public"])
+
+nextjs(
+    name = "example",
+)
 
 filegroup(
     name = "source_files",

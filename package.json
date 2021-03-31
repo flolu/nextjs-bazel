@@ -6,9 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:bazel": "bazelisk run client",
-    "start:bazel:debug": "bazelisk run client --sandbox_debug",
-    "start:image": "bazelisk run client_image"
+    "dev:bazel": "bazelisk run example.dev",
+    "start:bazel": "bazelisk run client"
   },
   "dependencies": {
     "next": "10.0.9",
