@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className="pb-5 text-5xl font-bold">
           <a href="https://nextjs.org">Next.js!</a> with <a href="https://bazel.build/">Bazel</a>
         </h1>
 

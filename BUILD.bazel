@@ -17,6 +17,8 @@ filegroup(
         "next-env.d.ts",
         "package.json",
         "yarn.lock",
+        "postcss.config.js",
+        "tailwind.config.js",
     ],
 )
 
@@ -43,9 +45,12 @@ next(
         "copy_source_files",
         "@npm//@types/node",
         "@npm//@types/react",
+        "@npm//autoprefixer",
         "@npm//next-pwa",
+        "@npm//postcss",
         "@npm//react",
         "@npm//react-dom",
+        "@npm//tailwindcss",
         "@npm//typescript",
     ],
 )
