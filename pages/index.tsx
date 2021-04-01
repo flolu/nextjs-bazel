@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.sass'
 
 export default function Home(): JSX.Element {
   return (

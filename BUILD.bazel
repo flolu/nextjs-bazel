@@ -26,6 +26,19 @@ copy_to_bin(
     srcs = ["source_files"],
 )
 
+NPM_DEPENDENCIES = [
+    "@npm//@types/node",
+    "@npm//@types/react",
+    "@npm//autoprefixer",
+    "@npm//next-pwa",
+    "@npm//postcss",
+    "@npm//react",
+    "@npm//react-dom",
+    "@npm//tailwindcss",
+    "@npm//typescript",
+    "@npm//sass",
+]
+
 next(
     name = "build",
     outs = [
@@ -37,18 +50,7 @@ next(
         "build",
         "$(RULEDIR)",
     ],
-    data = [
-        "copy_source_files",
-        "@npm//@types/node",
-        "@npm//@types/react",
-        "@npm//autoprefixer",
-        "@npm//next-pwa",
-        "@npm//postcss",
-        "@npm//react",
-        "@npm//react-dom",
-        "@npm//tailwindcss",
-        "@npm//typescript",
-    ],
+    data = ["copy_source_files"] + NPM_DEPENDENCIES,
 )
 
 next(
@@ -66,18 +68,7 @@ next(
         "--node_options=--preserve-symlinks-main",
         "--bazel_run_from_execroot",
     ],
-    data = [
-        "copy_source_files",
-        "@npm//@types/node",
-        "@npm//@types/react",
-        "@npm//autoprefixer",
-        "@npm//next-pwa",
-        "@npm//postcss",
-        "@npm//react",
-        "@npm//react-dom",
-        "@npm//tailwindcss",
-        "@npm//typescript",
-    ],
+    data = ["copy_source_files"] + NPM_DEPENDENCIES,
     env = {
         "NODE_ENV": "development",
     },

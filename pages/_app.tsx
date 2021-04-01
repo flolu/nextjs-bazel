@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.sass'
 
 import {AppProps} from 'next/app'
 
