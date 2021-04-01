@@ -7,8 +7,8 @@ load("@npm//next:index.bzl", "next")
 load(":expand_template.bzl", "expand_template")
 
 _bzl_opts = [
-    "--node_options=--preserve-symlinks-main",
-    "--bazel_run_from_execroot",
+    # "--node_options=--preserve-symlinks-main",
+    # "--bazel_run_from_execroot",
 ]
 
 def nextjs(name, deps = [], visibility = ["//visibility:public"]):
@@ -24,11 +24,11 @@ def nextjs(name, deps = [], visibility = ["//visibility:public"]):
         visibility: The visibility of the resulting targets (next.js output dir and public files).
     """
     inputs = "%s-srcs" % name
-    native.filegroup(name = inputs, srcs = native.glob(["pages/**", "styles/**"]) + ["tsconfig.json"])
+    native.filegroup(name = inputs, srcs = native.glob(["pages/**", "styles/**"]) + ["tsconfig.json", "postcss.config.js", "tailwind.config.js"])
 
     native.filegroup(
         name = "public_files",
-        srcs = native.glob(["public/**", "styles/**"]),
+        srcs = native.glob(["public/**"]),
         visibility = visibility,
     )
 
@@ -53,6 +53,7 @@ def nextjs(name, deps = [], visibility = ["//visibility:public"]):
         name = name,
         package = "next",
         data = [
+            "public_files",
             bin_inputs,
             cfg,
         ] + deps,

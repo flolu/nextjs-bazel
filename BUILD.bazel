@@ -7,6 +7,15 @@ package(default_visibility = ["//visibility:public"])
 
 nextjs(
     name = "example",
+    deps = [
+        "@npm//@types/node",
+        "@npm//@types/react",
+        "@npm//autoprefixer",
+        "@npm//next-pwa",
+        "@npm//postcss",
+        "@npm//tailwindcss",
+        "@npm//typescript",
+    ],
 )
 
 filegroup(

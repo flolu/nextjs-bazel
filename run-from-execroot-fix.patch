@@ -19,7 +19,7 @@ index d602cd2f78..fd2f83f5b5 100644
    if [[ ! -f "$MAIN" ]]; then
      if [ "$FROM_EXECROOT" = true ]; then
 -      MAIN="$EXECROOT/$MAIN"
-+      MAIN="$EXECROOT/"TEMPLATED_entry_point_execroot_path
++      MAIN="$EXECROOT/TEMPLATED_entry_point_execroot_path"
      else
        MAIN=TEMPLATED_entry_point_manifest_path
      fi

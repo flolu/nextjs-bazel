@@ -1,0 +1,9 @@
+diff --git a/node_modules/next/dist/build/is-writeable.js b/node_modules/next/dist/build/is-writeable.js
+index eb88210..7b5fe8c 100644
+--- a/node_modules/next/dist/build/is-writeable.js
++++ b/node_modules/next/dist/build/is-writeable.js
+@@ -1,2 +1,2 @@
+-"use strict";exports.__esModule=true;exports.isWriteable=isWriteable;var _fs=_interopRequireDefault(require("fs"));function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}async function isWriteable(directory){try{await _fs.default.promises.access(directory,(_fs.default.constants||_fs.default).W_OK);return true;}catch(err){return false;}}
++"use strict";exports.__esModule=true;exports.isWriteable=isWriteable;var _fs=_interopRequireDefault(require("fs"));function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}async function isWriteable(directory){try{await _fs.default.promises.access(directory,(_fs.default.constants||_fs.default).W_OK);return true;}catch(err){if(err.errno===-13&&err.path.includes('/bazel-out/'))return true;return false;}}
+ //# sourceMappingURL=is-writeable.js.map
+\ No newline at end of file
