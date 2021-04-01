@@ -1,0 +1,3 @@
+# Disable sandboxing
+# With sandboxing enabled Tailwind fails to purge CSS
+build --spawn_strategy=local
