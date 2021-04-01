@@ -11,8 +11,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="pb-5 text-5xl font-bold">
-          <a href="https://nextjs.org">Next.js!</a> with <a href="https://bazel.build/">Bazel</a>
+        <h1 className="pb-5 text-5xl">
+          <a href="https://nextjs.org" className="text-blue-700">Next.js!</a> with <a href="https://bazel.buil" className="text-green-500">Bazel</a>
         </h1>
 
         <p className={styles.description}>

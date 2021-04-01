@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "start:bazel": "bazelisk run client",
-    "start:bazel:debug": "bazelisk run client --sandbox_debug",
-    "start:image": "bazelisk run client_image",
+    "dev:native": "NODE_ENV=development next dev -p 3001",
+    "start:native": "next build && next start",
+    "dev": "ibazel run dev",
+    "start": "bazelisk run client",
+    "image": "bazelisk run client_image",
     "postinstall": "patch-package"
   },
   "dependencies": {
@@ -19,6 +18,7 @@
   },
   "devDependencies": {
     "@bazel/bazelisk": "^1.7.5",
+    "@bazel/ibazel": "^0.15.6",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
     "autoprefixer": "^10.2.5",
