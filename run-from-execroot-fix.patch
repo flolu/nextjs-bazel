@@ -1,0 +1,24 @@
+From 17a99f2c0e920c072734263683a790b0b4142412 Mon Sep 17 00:00:00 2001
+From: Duarte Nunes <duarte@hey.com>
+Date: Fri, 12 Mar 2021 12:56:05 -0300
+Subject: [PATCH] fix: remove current directory prefix when running from
+ execroot
+
+Fixes a regression where $PWD was included in the MAIN variable when
+FROM_EXECROOT is defined.
+---
+ internal/node/launcher.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/internal/node/launcher.sh b/internal/node/launcher.sh
+index d602cd2f78..fd2f83f5b5 100644
+--- a/internal/node/launcher.sh
++++ b/internal/node/launcher.sh
+@@ -349,6 +349,6 @@ else
+   if [[ ! -f "$MAIN" ]]; then
+     if [ "$FROM_EXECROOT" = true ]; then
+-      MAIN="$EXECROOT/$MAIN"
++      MAIN="$EXECROOT/TEMPLATED_entry_point_execroot_path"
+     else
+       MAIN=TEMPLATED_entry_point_manifest_path
+     fi

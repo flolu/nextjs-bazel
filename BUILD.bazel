@@ -11,7 +11,6 @@ filegroup(
         "pages/*",
         "styles/*",
     ]) + [
-        # FIXME not sure which of those are actually needed
         "tsconfig.json",
         "next.config.js",
         "next-env.d.ts",
@@ -32,12 +31,38 @@ next(
     outs = [
         ".next",
         "public/sw.js",
-        # FIXME this filename will probably change, needs more investigation
         "public/workbox-030153e1.js",
     ],
     args = [
         "build",
         "$(RULEDIR)",
+    ],
+    data = [
+        "copy_source_files",
+        "@npm//@types/node",
+        "@npm//@types/react",
+        "@npm//autoprefixer",
+        "@npm//next-pwa",
+        "@npm//postcss",
+        "@npm//react",
+        "@npm//react-dom",
+        "@npm//tailwindcss",
+        "@npm//typescript",
+    ],
+)
+
+next(
+    name = "dev",
+    args = [
+        "dev",
+
+        # Root of app is the directory in which this BUILD.bazel file is located in
+        package_name(),
+
+        # Set port of development server to 3001
+        "-p 3001",
+
+        # To prevent webpack from bundling multiple react versions
         "--node_options=--preserve-symlinks-main",
         "--bazel_run_from_execroot",
     ],
@@ -53,6 +78,10 @@ next(
         "@npm//tailwindcss",
         "@npm//typescript",
     ],
+    env = {
+        "NODE_ENV": "development",
+    },
+    tags = ["ibazel_notify_changes"],
 )
 
 nodejs_binary(
