@@ -19,4 +19,8 @@ module.exports = withPWA({
     config.watchOptions = { poll: 300 };
     return config;
   },
+
+  future: {
+    webpack5: true,
+  },
 });
